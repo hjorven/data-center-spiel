@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Center Spiel</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/logic.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/cabling.css">
+  <link rel="stylesheet" href="css/orders.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Data Center</h1>
+    <div id="hud" class="hud"><!-- gefuellt von js/logic --></div>
+  </header>
+
+  <main class="layout">
+    <section id="view-rack" class="panel" aria-label="Rack"><!-- js/logic --></section>
+    <section id="view-cabling" class="panel" aria-label="Verkabelung"><!-- js/cabling --></section>
+    <aside class="sidebar">
+      <section id="view-orders" class="panel" aria-label="Auftraege"><!-- js/orders --></section>
+      <section id="view-shop" class="panel" aria-label="Shop"><!-- js/shop --></section>
+    </aside>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

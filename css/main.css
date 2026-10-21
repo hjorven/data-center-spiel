@@ -1,0 +1,66 @@
+/* Globale Variablen und Layout. Modul-Styles liegen in eigenen Dateien. */
+:root {
+  --bg: #0f1419;
+  --panel: #1a2129;
+  --border: #2c3640;
+  --text: #d8e0e8;
+  --muted: #7d8a96;
+  --accent: #3fb68b;
+  --warn: #e0a83a;
+  --danger: #e05a4f;
+  --radius: 6px;
+  --gap: 12px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar h1 { font-size: 1.2rem; margin: 0; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 320px;
+  gap: var(--gap);
+  padding: var(--gap);
+}
+
+.sidebar { display: flex; flex-direction: column; gap: var(--gap); }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--gap);
+  min-height: 120px;
+}
+
+.panel h2 { font-size: 1rem; margin: 0 0 8px; color: var(--muted); }
+
+button {
+  background: var(--border);
+  color: var(--text);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+}
