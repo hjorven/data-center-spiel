@@ -74,10 +74,26 @@ game.makeId(prefix)
 | `cable:connected` | `{ cable }` | cabling |
 | `cable:disconnected` | `{ cableId }` | cabling |
 | `order:created` | `{ order }` | orders |
+| `order:accepted` | `{ order }` | orders |
 | `order:completed` | `{ order }` | orders |
 | `order:failed` | `{ order }` | orders |
 
 Neue Events hier eintragen, bevor sie verwendet werden.
+
+## Verkabelung und Auftraege
+
+- `js/cabling/network.js` ist die gemeinsame Netzwerklogik (Ports, Strom, Weg zum Router). `js/orders` importiert sie, beide Module gehoeren demselben Thread.
+- Ein Kabel verbindet zwei freie Ports gleichen Typs (`rj45`, `sfp`) oder ein Netzteil (`power`) mit einer Steckdose (`power-out`) einer PDU.
+- Beim Verbinden nimmt die Verkabelung ein passendes Kabel (`category: 'cable'`, Feld `cableType`) aus `state.inventory`. Liegt keins im Lager, wird es zum Katalogpreis per `game.spend` gekauft. Entfernte Kabel kommen ins Lager zurueck.
+- Auf `rack:deviceRemoved` entfernt die Verkabelung alle Kabel des Geraets und sendet je Kabel `cable:disconnected`.
+- Ein Geraet ist online, wenn es Strom hat (nur geprueft, wenn der Katalog eine PDU hat) und ueber Switches oder Patchpanels einen Router mit Strom erreicht. Der Router gilt als Internet.
+- Auftraege liegen in `state.orders` mit `status: 'open' | 'active' | 'done' | 'failed'`. Angebote erscheinen nach Spielerstufe, angenommene Auftraege haben eine Frist in Ticks. Nach der Frist gibt es die halbe Belohnung, nach doppelter Frist scheitert der Auftrag. Erledigte Auftraege reservieren ihre Geraete und zahlen alle 60 Ticks laufende Einnahmen, solange die Geraete online sind.
+
+## Tests
+
+```bash
+node --test
+```
 
 ## Arbeitsweise
 
