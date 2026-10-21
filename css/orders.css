@@ -1,1 +1,63 @@
 /* Styles fuer js/orders. Klassen mit Praefix .orders- verwenden. */
+.orders-section { margin-top: 10px; }
+.orders-section h3 {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+.orders-muted { color: var(--muted); font-size: .85rem; margin: 0; }
+
+.orders-message {
+  margin: 0 0 8px;
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  font-size: .85rem;
+  background: var(--border);
+}
+.orders-message-error { border-left: 3px solid var(--danger); }
+.orders-message-success { border-left: 3px solid var(--accent); }
+
+.orders-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  margin-bottom: 8px;
+  background: #151b21;
+}
+.orders-active { border-color: #2f5a4a; }
+.orders-late { border-color: var(--warn); }
+.orders-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+.orders-timer { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .8rem; white-space: nowrap; }
+.orders-late .orders-timer { color: var(--warn); }
+.orders-customer, .orders-req { margin: 4px 0; font-size: .85rem; }
+.orders-req { color: var(--muted); }
+
+.orders-checks { list-style: none; padding: 0; margin: 6px 0; font-size: .82rem; }
+.orders-checks li { display: flex; gap: 6px; padding: 1px 0; }
+.orders-check-ok { color: var(--accent); }
+.orders-check-open { color: var(--text); }
+.orders-check-mark { width: 1em; flex: 0 0 auto; }
+
+.orders-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.orders-actions { display: flex; gap: 6px; }
+.orders-reward { font-size: .85rem; font-weight: 600; }
+.orders-primary { background: var(--accent); color: #08110d; }
+.orders-primary:disabled { background: var(--border); color: var(--muted); }
+
+.orders-done { list-style: none; padding: 0; margin: 0; font-size: .82rem; }
+.orders-done li { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; }
+.orders-running .orders-done-state { color: var(--accent); }
+.orders-broken .orders-done-state { color: var(--danger); }

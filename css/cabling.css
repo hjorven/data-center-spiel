@@ -1,1 +1,163 @@
 /* Styles fuer js/cabling. Klassen mit Praefix .cabling- verwenden. */
+.cabling-root {
+  --cable-rj45: #4f9de0;
+  --cable-sfp: #e0a83a;
+  --cable-power: #e05a4f;
+  --cabling-u: 36px;
+  min-width: 0;
+}
+
+.cabling-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  margin-bottom: 8px;
+  font-size: .9rem;
+}
+.cabling-muted { color: var(--muted); }
+.cabling-error { color: var(--danger); }
+.cabling-danger { border-color: var(--danger); }
+
+.cabling-stage {
+  position: relative;
+  overflow: auto;
+  max-height: 75vh;
+  padding: 4px 4px 60px;
+}
+.cabling-racks {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.cabling-empty { margin: 0; align-self: center; }
+
+.cabling-svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 2; /* Kabel ueber den Geraeten, aber unter den Ports */
+}
+
+.cabling-rack { flex: 0 0 auto; width: min(360px, 100%); }
+.cabling-rack-head {
+  font-size: .8rem;
+  color: var(--muted);
+  padding: 2px 0 4px 28px;
+}
+.cabling-rack-body {
+  position: relative;
+  background: #0b0f13;
+  border: 2px solid var(--border);
+  border-left-width: 26px;
+  border-radius: 4px;
+}
+.cabling-unit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed #1c242c;
+}
+.cabling-unum {
+  position: absolute;
+  left: -24px;
+  width: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: right;
+  font-size: .65rem;
+  color: var(--muted);
+}
+
+.cabling-device {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 6px;
+  background: #222b34;
+  border: 1px solid #36424e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.cabling-cat-server, .cabling-cat-storage { background: #1f2a33; }
+.cabling-cat-switch { background: #1e2c2a; }
+.cabling-cat-router { background: #2a2433; }
+.cabling-cat-pdu { background: #2e2420; }
+
+.cabling-device-head {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  column-gap: 6px;
+  align-items: center;
+  width: 104px;
+  flex: 0 0 auto;
+  font-size: .72rem;
+  line-height: 1.15;
+}
+.cabling-device-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cabling-device-state { grid-column: 2; color: var(--muted); font-size: .65rem; }
+
+.cabling-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #444;
+}
+.cabling-led-on { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+.cabling-led-warn { background: var(--warn); }
+.cabling-led-off { background: #555; }
+
+.cabling-ports {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  align-content: center;
+  min-width: 0;
+}
+.cabling-port {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border-radius: 2px;
+  border: 1px solid #5b6a78;
+  background: #10161b;
+  cursor: crosshair;
+  touch-action: none;
+  position: relative;
+  z-index: 3;
+}
+.cabling-port:hover, .cabling-port:focus-visible { border-color: var(--text); outline: none; }
+.cabling-port-sfp { border-color: var(--cable-sfp); width: 16px; }
+.cabling-port-power, .cabling-port-power-out { border-color: var(--cable-power); border-radius: 50%; }
+.cabling-port-used.cabling-port-rj45 { background: var(--cable-rj45); }
+.cabling-port-used.cabling-port-sfp { background: var(--cable-sfp); }
+.cabling-port-used.cabling-port-power,
+.cabling-port-used.cabling-port-power-out { background: var(--cable-power); }
+.cabling-port-pending { outline: 2px solid var(--text); outline-offset: 1px; }
+.cabling-port-ok { box-shadow: 0 0 0 2px var(--accent); }
+.cabling-port-no { opacity: .35; }
+
+.cabling-cable {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: .9;
+}
+.cabling-cable-rj45 { stroke: var(--cable-rj45); }
+.cabling-cable-sfp { stroke: var(--cable-sfp); }
+.cabling-cable-power { stroke: var(--cable-power); stroke-dasharray: 6 3; }
+.cabling-cable-selected { stroke-width: 5; opacity: 1; filter: drop-shadow(0 0 3px #fff8); }
+.cabling-cable-draft { stroke: var(--text); stroke-dasharray: 4 4; opacity: .7; }
+.cabling-cable-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 12;
+  pointer-events: stroke;
+  cursor: pointer;
+}
