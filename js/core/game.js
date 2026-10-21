@@ -3,10 +3,13 @@
 
 import { createEventBus } from './events.js';
 import { createInitialState, makeId } from './state.js';
+import { saveState, loadState, clearState, applyState, defaultStorage } from './save.js';
 
-export function createGame() {
+export function createGame({ storage = defaultStorage() } = {}) {
   const bus = createEventBus();
   const state = createInitialState();
+  const saved = loadState(storage);
+  if (saved) applyState(state, createInitialState(), saved);
 
   const game = {
     state,
@@ -24,6 +27,19 @@ export function createGame() {
     earn(amount, reason) {
       state.money += amount;
       bus.emit('money:changed', { money: state.money, delta: amount, reason });
+    },
+
+    // Spielstand im localStorage sichern. Gibt false zurueck, wenn das nicht geht.
+    save() {
+      const ok = saveState(state, storage);
+      if (ok) bus.emit('game:saved', {});
+      return ok;
+    },
+    // Neues Spiel: Speicher loeschen, State auf Startwerte. Module rendern auf game:reset neu.
+    reset() {
+      clearState(storage);
+      applyState(state, createInitialState());
+      bus.emit('game:reset', {});
     },
   };
 

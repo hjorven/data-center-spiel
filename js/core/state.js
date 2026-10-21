@@ -7,6 +7,9 @@ export function createInitialState() {
     money: 1000,
     tick: 0,
 
+    // Angefangene Stromkosten, die noch keinen ganzen Dollar ergeben (js/logic).
+    powerDue: 0,
+
     // Gekaufte, noch nicht eingebaute Geraete: [{ id, type }]
     inventory: [],
 

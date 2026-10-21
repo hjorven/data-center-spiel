@@ -59,7 +59,35 @@ game.emit(name, payload)
 game.spend(amount, reason) // false, wenn zu wenig Geld
 game.earn(amount, reason)
 game.makeId(prefix)
+game.save()       // Spielstand in localStorage sichern (logic macht Autosave alle 10 Ticks)
+game.reset()      // Neues Spiel: Speicher loeschen, State zuruecksetzen, sendet game:reset
 ```
+
+`createGame()` laedt einen vorhandenen Spielstand aus dem localStorage (`js/core/save.js`),
+bevor die Module eingehaengt werden. `game.state` bleibt dabei dasselbe Objekt, Module sollen
+den State aber immer frisch lesen und keine Teile davon dauerhaft zwischenspeichern.
+
+### game.logic (von js/logic bereitgestellt)
+
+Regeln fuer Racks und Geraete, damit andere Module sie nutzen koennen, ohne `js/logic` zu importieren.
+Rueckgabe der Aktionen: `{ ok: true, ... }` oder `{ ok: false, reason }`.
+
+```js
+game.logic.installDevice(inventoryId, rackId, slot) // Inventar-ID wird zur deviceId
+game.logic.removeDevice(deviceId)                   // zurueck ins Inventar, Kabel raeumt cabling auf
+game.logic.moveDevice(deviceId, rackId, slot)
+game.logic.canPlace(type, rackId, slot)
+game.logic.freeSlots(type, rackId)                  // alle passenden Start-Slots
+game.logic.buyRack(units)                           // units aus game.logic.rackOffers (24, 42)
+game.logic.powerUsage()                             // Watt aller eingebauten Geraete
+game.logic.powerCostPerTick()
+game.logic.capacity()                               // Summe aus Katalog capacity, z.B. { cpu, ram, storage }
+game.logic.start() / stop() / isRunning()           // Game-Loop, 1 Tick pro Sekunde
+```
+
+Slots: `racks[i].slots[s]` ist `null` oder eine deviceId, Index 0 ist oben im Rack.
+Ein Geraet mit `units = n` belegt `slots[slot]` bis `slots[slot + n - 1]`.
+Strom kostet pro Tick `Watt / 1000 * 0.5 $` und wird in ganzen Dollar abgezogen (Schulden moeglich).
 
 ## Events
 
@@ -71,6 +99,10 @@ game.makeId(prefix)
 | `shop:purchased` | `{ item, inventoryId }` | shop |
 | `rack:deviceInstalled` | `{ deviceId, rackId, slot }` | logic |
 | `rack:deviceRemoved` | `{ deviceId }` | logic |
+| `rack:deviceMoved` | `{ deviceId, rackId, slot }` | logic |
+| `rack:added` | `{ rackId }` | logic |
+| `game:saved` | `{}` | core (save) |
+| `game:reset` | `{}` | core (reset), danach neu rendern |
 | `cable:connected` | `{ cable }` | cabling |
 | `cable:disconnected` | `{ cableId }` | cabling |
 | `order:created` | `{ order }` | orders |
@@ -78,6 +110,14 @@ game.makeId(prefix)
 | `order:failed` | `{ order }` | orders |
 
 Neue Events hier eintragen, bevor sie verwendet werden.
+
+## Tests
+
+```bash
+npm test
+```
+
+Laeuft mit dem eingebauten Test-Runner von Node (ab Version 20), ohne Abhaengigkeiten.
 
 ## Arbeitsweise
 
