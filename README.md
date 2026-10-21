@@ -69,6 +69,7 @@ game.makeId(prefix)
 | `tick` | `{ tick }` | logic |
 | `money:changed` | `{ money, delta, reason }` | core (spend/earn) |
 | `shop:purchased` | `{ item, inventoryId }` | shop |
+| `shop:sold` | `{ item, inventoryId, refund }` | shop |
 | `rack:deviceInstalled` | `{ deviceId, rackId, slot }` | logic |
 | `rack:deviceRemoved` | `{ deviceId }` | logic |
 | `cable:connected` | `{ cable }` | cabling |

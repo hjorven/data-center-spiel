@@ -1,1 +1,160 @@
 /* Styles fuer js/shop. Klassen mit Praefix .shop- verwenden. */
+.shop {
+  --shop-switch: #4aa8ff;
+  --shop-router: #c58cff;
+  --shop-server: var(--accent);
+  --shop-storage: #3cc4c4;
+  --shop-patchpanel: #9aa7b3;
+  --shop-pdu: var(--warn);
+  --shop-cable: #f08a5d;
+  --shop-inset: #141a21;
+  position: relative;
+}
+
+.shop-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.shop-header h2 { margin: 0; }
+.shop-balance {
+  font-family: ui-monospace, Consolas, monospace;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.shop-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.shop-tab {
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.shop-tab.is-active {
+  color: var(--text);
+  background: var(--border);
+  border-color: var(--accent);
+}
+
+.shop-list, .shop-specs, .shop-inv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.shop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.shop-item {
+  --cat: var(--accent);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 8px;
+  background: var(--shop-inset);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cat);
+  border-radius: var(--radius);
+}
+.cat-switch { --cat: var(--shop-switch); }
+.cat-router { --cat: var(--shop-router); }
+.cat-server { --cat: var(--shop-server); }
+.cat-storage { --cat: var(--shop-storage); }
+.cat-patchpanel { --cat: var(--shop-patchpanel); }
+.cat-pdu { --cat: var(--shop-pdu); }
+.cat-cable { --cat: var(--shop-cable); }
+
+.shop-item-main { min-width: 0; }
+.shop-item-title { display: flex; align-items: center; gap: 6px; }
+.shop-item-name { font-weight: 600; font-size: 0.92rem; }
+.shop-owned {
+  font-size: 0.72rem;
+  color: var(--cat);
+  border: 1px solid var(--cat);
+  border-radius: 999px;
+  padding: 0 6px;
+}
+.shop-desc { margin: 2px 0 4px; color: var(--muted); font-size: 0.78rem; }
+.shop-specs { display: flex; flex-wrap: wrap; gap: 3px; }
+.shop-specs li {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.7rem;
+  background: var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.shop-item-buy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px;
+}
+.shop-price { font-family: ui-monospace, Consolas, monospace; font-size: 0.85rem; }
+.shop-buy-row { display: flex; gap: 4px; }
+.shop-buy {
+  background: var(--cat);
+  color: #0b0f14;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.shop-buy:hover:not(:disabled) { filter: brightness(1.15); border-color: transparent; }
+.shop-buy:disabled { background: var(--border); color: var(--muted); }
+
+.shop-inv { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; }
+.shop-inv summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; }
+.shop-inv-total { font-family: ui-monospace, Consolas, monospace; }
+.shop-inventory { margin-top: 6px; }
+.shop-empty { margin: 0; color: var(--muted); font-size: 0.82rem; }
+.shop-inv-list { display: flex; flex-direction: column; gap: 4px; }
+.shop-inv-item {
+  --cat: var(--accent);
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border-left: 3px solid var(--cat);
+  background: var(--shop-inset);
+  border-radius: 3px;
+  font-size: 0.82rem;
+}
+.shop-inv-count { font-family: ui-monospace, Consolas, monospace; color: var(--cat); }
+.shop-sell {
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--border);
+}
+.shop-sell:hover { color: var(--text); }
+
+.shop-toast {
+  position: absolute;
+  left: 50%;
+  top: 36px;
+  transform: translate(-50%, -10px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.shop-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+.shop-toast.is-error { border-color: var(--danger); }
