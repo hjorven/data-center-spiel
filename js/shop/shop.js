@@ -10,7 +10,7 @@
 
 import { CATALOG, CATEGORIES, getItem, sellPrice, specLabels } from './catalog.js';
 
-const money = (n) => `${n.toLocaleString('de-DE')} €`;
+const money = (n) => `${Math.floor(n).toLocaleString('de-DE')} $`;
 
 export function buyItem(game, type, qty = 1) {
   const item = getItem(type);
