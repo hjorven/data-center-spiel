@@ -1,0 +1,8 @@
+{
+  "name": "data-center-spiel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

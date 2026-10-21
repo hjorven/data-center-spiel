@@ -1,1 +1,54 @@
 /* Styles fuer js/logic. Klassen mit Praefix .logic- verwenden. */
+
+.hud { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: .9rem; }
+.logic-hud-item { white-space: nowrap; }
+.logic-negative b { color: var(--danger); }
+
+.logic-section h3 { font-size: .85rem; margin: 0 0 6px; color: var(--muted); font-weight: 600; }
+.logic-hint { color: var(--muted); font-size: .85rem; margin: 0 0 8px; }
+
+.logic-inventory { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.logic-inventory li { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: .9rem; }
+.logic-inventory small, .logic-rack small { color: var(--muted); }
+
+.logic-active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 25%, var(--border)); }
+
+.logic-selection {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  padding: 6px 8px; margin-bottom: 8px; font-size: .85rem;
+  border: 1px solid var(--accent); border-radius: var(--radius);
+}
+.logic-message { color: var(--warn); font-size: .85rem; margin: 0 0 8px; }
+
+.logic-racks { display: flex; flex-wrap: wrap; gap: var(--gap); }
+.logic-rack { margin: 0; --logic-unit-h: 22px; }
+.logic-rack figcaption { font-size: .85rem; margin-bottom: 4px; }
+.logic-rack-grid {
+  display: grid;
+  grid-template-columns: 26px minmax(160px, 220px);
+  gap: 1px;
+  padding: 4px;
+  background: #0a0e12;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+}
+.logic-unit-label { grid-column: 1; font-size: .65rem; color: var(--muted); text-align: right; padding-right: 4px; line-height: var(--logic-unit-h); }
+.logic-slot { grid-column: 2; padding: 0; border-radius: 2px; background: #151b21; border: 1px dashed transparent; cursor: default; }
+.logic-slot:hover { border-color: transparent; }
+.logic-slot-valid { border-color: var(--accent); cursor: pointer; }
+.logic-slot-valid:hover { background: color-mix(in srgb, var(--accent) 30%, #151b21); }
+
+.logic-device {
+  grid-column: 2; padding: 0 8px; border-radius: 3px;
+  text-align: left; font-size: .75rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  background: #2a3540; border-left: 4px solid var(--muted);
+}
+.logic-device-server { border-left-color: #4f8fe0; }
+.logic-device-storage { border-left-color: #a46be0; }
+.logic-device-switch { border-left-color: var(--accent); }
+.logic-device-router { border-left-color: var(--warn); }
+.logic-device-patchpanel { border-left-color: #9aa5b0; }
+.logic-device-ups { border-left-color: var(--danger); }
+.logic-device.logic-active { border-color: var(--accent); border-left-width: 4px; }
+
+.logic-buy { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--gap); }
